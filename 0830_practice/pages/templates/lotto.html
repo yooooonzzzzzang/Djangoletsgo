@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>로또 당첨 횟수를 알아보자.</h1>
+  <hr>
+  <h3>이번 회차 당첨 번호: {{lotto_nums}} + {{lotto_bonus}} </h3>
+  <ul>
+    {% for key, val in match.items  %}
+      <li>{{key}} : {{val}}번</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

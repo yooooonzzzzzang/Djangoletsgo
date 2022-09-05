@@ -5,8 +5,10 @@ from .models import Article
 
 
 def read(request):
-    articles = Article.objects.order_by('id')
-    context = {'articles': articles}
+    articles = Article.objects.all()
+    context = {
+        'bus': articles,
+        }
     return render(request, 'articles/read.html', context)
 
 
@@ -28,3 +30,23 @@ def detail(request, pk):
         'article': article,
     }
     return render(request, 'articles/detail.html', context)
+
+def delete(request, pk):
+    article = Article.objects.get(pk=pk)
+    article.delete()
+    return redirect('articles:read')
+
+def edit(request, pk):
+    article = Article.objects.get(pk=pk)
+    context = {
+        'article': article,
+    }
+    return render(request, 'articles/edit.html', context)
+
+
+def update(request, pk):
+    article = Article.objects.get(pk=pk)
+    article.title = request.POST.get('title')
+    article.content = request.POST.get('content')
+    article.save()
+    return redirect('articles:detail', article.pk)
