@@ -1,5 +1,7 @@
+import imp
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_safe, require_http_methods, require_POST
+from django.contrib.auth.decorators import login_required
 from .models import Article
 from .forms import ArticleForm
 
@@ -13,7 +15,7 @@ def index(request):
     }
     return render(request, 'articles/index.html', context)
 
-
+@login_required
 @require_http_methods(['GET', 'POST'])
 def create(request):
     if request.method == 'POST':
@@ -37,14 +39,14 @@ def detail(request, pk):
     }
     return render(request, 'articles/detail.html', context)
 
-
 @require_POST
 def delete(request, pk):
-    article = Article.objects.get(pk=pk)
-    article.delete()
+    if request.user.is_authenticated:
+        article = Article.objects.get(pk=pk)
+        article.delete()
     return redirect('articles:index')
 
-
+@login_required
 @require_http_methods(['GET', 'POST'])
 def update(request, pk):
     article = Article.objects.get(pk=pk)
