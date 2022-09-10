@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>INDEX</h1>
+  <hr>
+  {% for member in members %}
+    <h3>{{member.pk}}번 유저 :{{member.username}} </h3>
+    <hr>
+  {% endfor %}
+ 
+{% endblock content %}
+
+
+
