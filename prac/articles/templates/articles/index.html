@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+
+{%block content%}
+  <h1>전체 게시글 조회</h1>
+  <a href="{% url 'articles:new' %} ">글 작성하기</a>
+  <hr>
+  {% for article in articles  %}
+    <p>{{article.pk}} </p>
+    <p> 제목 : {{article.title}}  </p>
+    <a href ="{% url 'articles:detail' article.pk %} ">상세보기</a>
+    <hr>
+  {% endfor %}
+{% endblock%}

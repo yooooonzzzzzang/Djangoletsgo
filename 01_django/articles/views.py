@@ -1,5 +1,5 @@
 import random
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 def index(request):
@@ -7,7 +7,11 @@ def index(request):
 
 
 def greeting(request):
-    foods = ['apple', 'banana', 'coconut',]
+    foods = [
+        'apple',
+        'banana',
+        'coconut',
+    ]
     info = {
         'name': 'Alice',
     }
@@ -19,7 +23,11 @@ def greeting(request):
 
 
 def dinner(request):
-    foods = ['apple', 'banana', 'coconut',]
+    foods = [
+        'apple',
+        'banana',
+        'coconut',
+    ]
     pick = random.choice(foods)
     context = {
         'pick': pick,
@@ -29,7 +37,8 @@ def dinner(request):
 
 
 def throw(request):
-    return render(request, 'articles/throw.html')
+    # return render(request, 'articles/throw.html')
+    return redirect('articles:catch')
 
 
 def catch(request):
@@ -50,4 +59,3 @@ def hello(request, name):
         'name': name,
     }
     return render(request, 'articles/hello.html', context)
-
