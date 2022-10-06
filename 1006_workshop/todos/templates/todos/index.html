@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>INDEX</h1>
+<a href="{% url 'todos:new' %}">NEW</a>
+<hr>
+{% for todo in todos %}
+  {% if request.user == todo.author %}
+    <h1>할 일: {{todo.title}} </h1>
+    <p>작성자: {{todo.author}} </p>
+    <br>
+    <p>완료여부: {{todo.completed}} </p>
+    <hr>
+  {% endif %}
+{% endfor %}
+<a href="{% url 'accounts:logout' %}">logout</a>
+{% endblock content %}
+
+
+

@@ -22,13 +22,18 @@
   <h4>댓글 목록</h4>
   {% if comments %}
     <p>{{ comments|length }}개의 댓글이 있습니다. </p>
-  {% endif %}
+  {% endif %} 
+  
+  {% comment %} {% for comment in article.comment_set.all %}
+    <p>{{ comment.content }}</p>
+  {% endfor %} {% endcomment %}
+
   <ul>
     {% for comment in comments %}
       <li>
         {{ comment.user}} - {{ comment.content}} 
         {% if request.user == comment.user %}
-          <form action="{% url 'articles:comments_delete' article.pk comment.pk %} ">
+          <form action="{% url 'articles:comments_delete' article.pk comment.pk %} " method="POST">
             {% csrf_token %}
             <input type="submit" value = 'delete'>
           </form>
@@ -36,7 +41,7 @@
       </li>
     {% empty %}
       <li>댓글이 없습니다.</li>
-    {% endfor %}
+    {% endfor %} 
   </ul>
   <hr>
   {% if request.user.is_authenticated %}

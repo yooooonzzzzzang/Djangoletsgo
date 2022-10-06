@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_http_methods, require_POST, require_safe
+from django.views.decorators.http import (
+    require_http_methods,
+    require_POST,
+    require_safe,
+)
 from django.contrib.auth.decorators import login_required
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
@@ -41,10 +45,9 @@ def detail(request, pk):
     context = {
         'article': article,
         'comment_form': comment_form,
-        'comments':comments,
+        'comments': comments,
     }
     return render(request, 'articles/detail.html', context)
-
 
 
 @require_POST
@@ -52,8 +55,8 @@ def delete(request, pk):
     article = Article.objects.get(pk=pk)
     if request.user.is_authenticated:
         if request.user == article.user:
-             article.delete()
-             return redirect('articles:index')
+            article.delete()
+            return redirect('articles:index')
     return redirect('articles:detail', article.pk)
 
 
@@ -78,6 +81,7 @@ def update(request, pk):
     }
     return render(request, 'articles/update.html', context)
 
+
 # 댓글
 @require_POST
 def comments_create(request, pk):
@@ -88,10 +92,11 @@ def comments_create(request, pk):
             # 저장은 아직안하고 인스턴스를 줌. 저장되기전에 할 거 할 수 있게
             comment = comment_form.save(commit=False)
             comment.article = article
-            comment.user = request.user 
+            comment.user = request.user
             comment.save()
         return redirect('articles:detail', article.pk)
     return redirect('accounts:login')
+
 
 @require_POST
 def comments_delete(request, article_pk, comment_pk):
