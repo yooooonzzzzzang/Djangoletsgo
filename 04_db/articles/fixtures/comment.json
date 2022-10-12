@@ -1,0 +1,35 @@
+[
+{
+    "model": "articles.comment",
+    "pk": 1,
+    "fields": {
+        "article": 1,
+        "user": 1,
+        "content": "댓글이용",
+        "created_at": "2022-10-12T06:14:23.295Z",
+        "updated_at": "2022-10-12T06:14:23.295Z"
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 2,
+    "fields": {
+        "article": 2,
+        "user": 2,
+        "content": "오 제가 좋아하는 글입니다",
+        "created_at": "2022-10-12T06:22:50.393Z",
+        "updated_at": "2022-10-12T06:22:50.393Z"
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 3,
+    "fields": {
+        "article": 1,
+        "user": 2,
+        "content": "여기가 핫플인가여?",
+        "created_at": "2022-10-12T06:23:06.658Z",
+        "updated_at": "2022-10-12T06:23:06.658Z"
+    }
+}
+]
