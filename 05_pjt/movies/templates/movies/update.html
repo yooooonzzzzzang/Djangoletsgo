@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+<h1>UPDATE</h1>
+<hr>
+<div class ="container">
+  <form action="{% url 'movies:update' movie.pk %}" method = "POST">
+    {% csrf_token %}
+    
+    {% bootstrap_form form %}
+  
+    <input type="submit" value ="SUBMIT" class = 'btn btn-primary'>
+    <input type="reset" value= "CANCEL" class = "btn btn-primary">
+  </form>
+</div>
+<hr>
+{% comment %} detail 로 이동 {% endcomment %}
+<a href="{% url 'movies:index' %}" type='submit' class='btn btn-info'>BACK</a>
+{% endblock content %}
+

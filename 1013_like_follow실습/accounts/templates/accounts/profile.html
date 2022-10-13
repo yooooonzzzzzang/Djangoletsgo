@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ person.username }}님의 프로필 </h1>
+  <hr>
+  <div>
+    팔로잉: {{ person.followings.all|length}}<br>
+    <ul>
+    {% for following in person.followings.all %}
+      <li>{{following.username}} </li>
+    {% endfor %}
+    </ul>
+    팔로워: {{ person.followers.all|length}}
+    {% for follower in person.followers.all %}
+    <li>{{follower.username}} </li>
+    {% endfor %}
+  </div>
+
+  <form action="{% url 'accounts:follow' person.pk %}" method="POST">
+    {% csrf_token %}
+    {% if request.user in person.followers.all%}
+      <input type="submit" value="Unfollow">
+    {% else %}
+      <input type="submit" value="follow">
+    {% endif %}
+  </form>
+  <hr>
+  <h2>-{{ person.username }}님의 게시글- </h2>
+  {% for article in person.article_set.all %}
+    <div>{{ article.title }} - 💗like {{ article.like_users.all|length }} </div>
+  {% endfor %}
+<a href="{% url 'articles:index' %}">뒤로가기</a>
+{% endblock content %}
+
+
+
